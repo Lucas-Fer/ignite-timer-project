@@ -21,13 +21,16 @@ const formValidationSchema = zod.object({
 })
 
 export default function Home() {
-  const { register, handleSubmit, watch } = useForm({
+  // register: recebe o name do input e métodos
+  const { register, handleSubmit, watch, formState } = useForm({
     resolver: zodResolver(formValidationSchema),
   })
 
   function handleForm(data: any) {
     console.log('data', data)
   }
+
+  console.log(formState.errors)
 
   const taskState = watch('task')
   const disabledButton = !taskState
