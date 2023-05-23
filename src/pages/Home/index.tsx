@@ -24,12 +24,19 @@ type FormData = zod.infer<typeof formValidationSchema>
 
 export default function Home() {
   // register: recebe o name do input e métodos
-  const { register, handleSubmit, watch, formState } = useForm<FormData>({
-    resolver: zodResolver(formValidationSchema),
-  })
+  const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
+    {
+      resolver: zodResolver(formValidationSchema),
+      defaultValues: {
+        task: '',
+        minutesAmount: 0,
+      },
+    },
+  )
 
   function handleForm(data: FormData) {
     console.log('data', data)
+    reset()
   }
 
   console.log(formState.errors)
