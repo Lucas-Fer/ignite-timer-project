@@ -20,13 +20,15 @@ const formValidationSchema = zod.object({
     .max(60, 'O intervalo deve ser no máximo 60 minutos'),
 })
 
+type FormData = zod.infer<typeof formValidationSchema>
+
 export default function Home() {
   // register: recebe o name do input e métodos
-  const { register, handleSubmit, watch, formState } = useForm({
+  const { register, handleSubmit, watch, formState } = useForm<FormData>({
     resolver: zodResolver(formValidationSchema),
   })
 
-  function handleForm(data: any) {
+  function handleForm(data: FormData) {
     console.log('data', data)
   }
 
